@@ -36,7 +36,7 @@ body {
   box-shadow: 0 0 8px rgb(0, 4, 255);
   transform: scale(1.05);
 }
-/* Estilo dos Botões de Login e Sign Up */
+
 .btn-login-signup {
   display: flex;
   gap: 10px;
@@ -71,7 +71,7 @@ body {
   transform: scale(1.05);
 }
 
-/* Estilo das Abas de Notícias */
+
 .news-tabs {
   display: flex;
   gap: 10px;
@@ -105,7 +105,7 @@ body {
 
 
 
-/* ESTILO DO CABEÇALHO */
+
 header {
   padding: 40px 4%;
 }
@@ -137,7 +137,6 @@ header nav ul li {
   padding: 0 40px;
 }
 
-/* ESTILO DO TOPO DO SITE */
 section.topo-do-site {
   padding: 40px 4%;
 }
@@ -179,7 +178,7 @@ section.topo-do-site .flex {
   }
 }
 
-/* ESTILO DAS SEÇÕES */
+
 section {
   padding: 60px 4%;
 }
@@ -197,7 +196,7 @@ section p {
   color: #555;
 }
 
-/* ESTILO DO RODAPÉ */
+
 footer {
   background-color: #f8f8f8;
   padding: 20px 4%;
@@ -217,7 +216,7 @@ footer .footer-info a {
 footer .footer-info a:hover {
   text-decoration: underline;
 }
-/* ESTILO GERAL */
+
 * {
   margin: 0;
   padding: 0;
@@ -256,7 +255,7 @@ body {
   transform: scale(1.05);
 }
 
-/* ESTILO DO CABEÇALHO */
+
 header {
   padding: 40px 4%;
 }
@@ -288,7 +287,7 @@ header nav ul li {
   padding: 0 40px;
 }
 
-/* ESTILO DO TOPO DO SITE */
+
 section.topo-do-site {
   padding: 40px 4%;
 }
@@ -329,7 +328,7 @@ section.topo-do-site .flex {
   }
 }
 
-/* ESTILO DAS SEÇÕES */
+
 section {
   padding: 60px 4%;
 }
@@ -346,7 +345,7 @@ section p {
   color: #555;
 }
 
-/* ESTILO DAS OLIMPÍADAS */
+
 section.olimpiadas {
   padding: 60px 4%;
 }
@@ -382,7 +381,7 @@ section.olimpiadas {
   color: #666;
 }
 
-/* ESTILO DO RODAPÉ */
+
 footer {
   background-color: #f8f8f8;
   padding: 20px 4%;
@@ -403,7 +402,7 @@ footer .footer-info a:hover {
   text-decoration: underline;
 }
 
-/* Estilo dos Botões de Login e Sign Up */
+
 .btn-site-olimpiada {
   display: flex;
   gap: 10px;
