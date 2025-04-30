@@ -186,14 +186,20 @@
       document.querySelectorAll('.user-section').forEach(section => {
         section.style.display = 'none';
       });
-  
+
+      const dataNascimentoInput = document.getElementById('dataNascimento');
+      
       if (tipoUsuario === "Aluno") {
         document.querySelector('.aluno').style.display = 'block';
-      } else if (tipoUsuario === "Professor") {
+        dataNascimentoInput.required = true;
+      }else {
+        dataNascimentoInput.required = false;
+      if(tipoUsuario === "Professor") {
         document.querySelector('.professor').style.display = 'block';
-      } else if (tipoUsuario === "Instituição") {
+      }else if (tipoUsuario === "Instituição") {
         document.querySelector('.instituicao').style.display = 'block';
       }
+}
   
       const form = document.getElementById("signup-form");
   
@@ -208,7 +214,6 @@
   
         const formData = new FormData(form);
   
-        // Garante que todos os campos estejam presentes
         const campos = [
           'dataNascimento',
           'firstname',
