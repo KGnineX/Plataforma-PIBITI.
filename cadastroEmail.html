@@ -128,7 +128,12 @@
       <input type="text" id="institution" name="institution" placeholder="Nome da instituição" required>
 
       <div class="user-section aluno">
+        <div>
+            <label for="dataNascimento">Data de nascimento</label>
+            <input type="date" id="dataNascimento" name="dataNascimento" required>
+          </div>
         <div class="name-group">
+          
           <div>
             <label for="firstname">Primeiro nome</label>
             <input type="text" id="firstname" name="firstname">
@@ -137,6 +142,7 @@
             <label for="lastname">Sobrenome</label>
             <input type="text" id="lastname" name="lastname">
           </div>
+          
         </div>
       </div>
 
@@ -176,12 +182,11 @@
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const tipoUsuario = localStorage.getItem("tipoUsuario");
-      const dataNascimento = localStorage.getItem("dataNascimento");
-
+  
       document.querySelectorAll('.user-section').forEach(section => {
         section.style.display = 'none';
       });
-
+  
       if (tipoUsuario === "Aluno") {
         document.querySelector('.aluno').style.display = 'block';
       } else if (tipoUsuario === "Professor") {
@@ -189,31 +194,41 @@
       } else if (tipoUsuario === "Instituição") {
         document.querySelector('.instituicao').style.display = 'block';
       }
-
+  
       const form = document.getElementById("signup-form");
-
-      // Adiciona tipoUsuario e dataNascimento como campos ocultos
+  
       const tipoInput = document.createElement("input");
       tipoInput.type = "hidden";
       tipoInput.name = "tipoUsuario";
       tipoInput.value = tipoUsuario;
       form.appendChild(tipoInput);
-
-      const dataInput = document.createElement("input");
-      dataInput.type = "hidden";
-      dataInput.name = "dataNascimento";
-      dataInput.value = dataNascimento;
-      form.appendChild(dataInput);
-
+  
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-
+  
         const formData = new FormData(form);
+  
+        // Garante que todos os campos estejam presentes
+        const campos = [
+          'dataNascimento',
+          'firstname',
+          'lastname',
+          'nomeProfessor',
+          'disciplina',
+          'responsavel',
+          'cargo',
+          'emailContato'
+        ];
+        campos.forEach(campo => {
+          if (!formData.has(campo)) {
+            formData.append(campo, '');
+          }
+        });
+  
         const data = new URLSearchParams(formData);
-
-        fetch("https://script.google.com/macros/s/AKfycbwwI0gIzWjksB7Otjul-1rIY4d6shnD0g_iHK64rbJPgN6JJHF5VI6C3AyGY5QIICu3Dw/exec", {
+  
+        fetch("https://script.google.com/macros/s/AKfycbxvRN3nY74Je9wiLgn714-g6mjfFzA7lksdnvtoHfQwQSUbeQERuIltPPfhN0UOJrBY8Q/exec", {
           method: "POST",
-          mode: "no-cors",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded"
           },
@@ -228,5 +243,6 @@
       });
     });
   </script>
+  
 </body>
 </html>
