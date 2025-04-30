@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signup-container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .signup-container img {
+      width: 150px;
+      margin-bottom: 20px;
+    }
+
+    .signup-container h2 {
+      color: blue;
+      margin-bottom: 20px;
+    }
+
+    .user-type-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 15px;
+    }
+
+    .user-type-buttons button {
+      flex: 1;
+      margin: 0 5px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: white;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .user-type-buttons button.selected {
+      background-color: blue;
+      color: white;
+      font-weight: bold;
+    }
+
+    .signup-container input[type="date"],
+    .signup-container input[type="button"] {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .signup-container input[type="button"] {
+      background-color: blue;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .signup-container input[type="button"]:hover {
+      box-shadow: 0 0 8px rgb(54, 54, 228);
+      transform: scale(1.05);
+    }
+    
+
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <a href="index.html"><img src="img/logo_clube_olímpico-removebg-preview.png" alt="Logo Clube Olímpico"></a>
+    <h2>Escolha seu tipo de usuário</h2>
+
+    <div class="user-type-buttons">
+      <button id="aluno" class="user-type" onclick="selectUserType(this, 'Aluno')">Aluno</button>
+      <button id="professor" class="user-type" onclick="selectUserType(this, 'Professor')">Professor</button>
+      <button id="instituicao" class="user-type" onclick="selectUserType(this, 'Instituição')">Instituição</button>
+    </div>
+
+    <label for="dataNascimento">Data de nascimento</label>
+    <input type="date" id="dataNascimento" required>
+
+    <input type="button" value="Avançar" onclick="nextStep()">
+    
+    <p>Já possui uma conta? <a href="login.html">Login</a></p>
+  </div>
+
+  <script>
+    let selectedUserType = null;
+
+    function selectUserType(button, type) {
+      selectedUserType = type;
+
+      // Remover a classe 'selected' de todos os botões
+      document.querySelectorAll('.user-type').forEach(btn => {
+        btn.classList.remove('selected');
+      });
+
+      // Adicionar a classe 'selected' ao botão clicado
+      button.classList.add('selected');
+    }
+
+    function nextStep() {
+      if (!selectedUserType) {
+        alert("Selecione o tipo de usuário!");
+        return;
+      }
+
+      const dataNascimento = document.getElementById('dataNascimento').value;
+      if (!dataNascimento) {
+        alert("Selecione a data de nascimento!");
+        return;
+      }
+
+      localStorage.setItem("tipoUsuario", selectedUserType);
+      localStorage.setItem("dataNascimento", dataNascimento);
+      window.location.href = 'cadastroEmail.html';  
+    }
+  </script>
+</body>
+</html>

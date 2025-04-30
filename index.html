@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <title>Site de Divulgação de Olimpíadas Científicas</title>
+</head>
+<body>
+    <header>
+        <div class="interface">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/logo_clube_olímpico-removebg-preview.png" alt="Logo do Clube Olímpico" height="80" width="80">
+                </a>
+            </div>
+            <nav class="menu-desktop">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="olimpiadas.html">Olimpíadas</a></li>
+                    <li><a href="treinamento.html">Treinamento</a></li>
+                    <li><a href="equipe.html">Equipe</a></li>
+                    <li><a href="noticias.html">Notícias</a></li>
+                </ul>
+            </nav>
+            <div class="btn-login-signup">
+                <a href="login.html"><button class="login">Login</button></a>
+                <a href="cadastro.html"><button class="signup">Cadastre-se</button></a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="topo-do-site">
+            <div class="interface">
+                <div class="flex">
+                    <div class="txt-topo-site">
+                        <h1>O CLUBE OLÍMPICO <span>.</span></h1>
+                        <p>Nosso objetivo é fomentar o interesse, oferecer suporte e treinamento para que os alunos alcancem excelência nas participações em olimpíadas científicas, contribuindo para o desenvolvimento da cultura olímpica em toda comunidade educacional.</p>
+                    </div>
+                    <div class="img-topo-site">
+                        <img src="img/IMAGEM_FLUTUANTE_SITE-removebg-preview.png" alt="Imagem Flutuante">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quem-somos" class="quem-somos">
+            <div class="interface">
+                <h2>Quem Somos</h2>
+                <p>Somos um grupo dedicado a promover a cultura das olimpíadas científicas entre os estudantes. Nossa missão é fornecer recursos, treinamentos e suporte para que todos possam alcançar seu máximo potencial.</p>
+            </div>
+        </section>
+
+        <section id="notícias" class="notícias">
+            <div class="interface">
+                <h2>Notícias</h2>
+                <p>Conheça nossos projetos e iniciativas para apoiar e desenvolver talentos em diversas áreas científicas.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="interface">
+            <div class="footer-info">
+                <p>&copy; 2025 Plataforma Digital de Divulgação, Incentivo e Treinamento em Competições e Olimpíadas Científicas do Conhecimento. Todos os direitos reservados.</p>
+                <p>Contato: <a href="mailto:adina.santos@ifal.edu.br">adina.santos@ifal.edu.br</a></p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const dadosUsuario = localStorage.getItem("usuarioLogado");
+    
+        if (dadosUsuario) {
+            const usuario = JSON.parse(dadosUsuario);
+            const botoes = document.querySelector(".btn-login-signup");
+    
+            if (botoes) botoes.style.display = "none";
+    
+            const header = document.querySelector(".interface");
+    
+            const menuBox = document.createElement("div");
+            menuBox.style.backgroundColor = "#f0f0f0";
+            menuBox.style.borderRadius = "10px";
+            menuBox.style.padding = "10px 15px";
+            menuBox.style.display = "flex";
+            menuBox.style.flexDirection = "column";
+            menuBox.style.alignItems = "flex-start";
+            menuBox.style.boxShadow = "0 2px 6px rgba(0, 0, 0, 0.1)";
+            menuBox.style.marginLeft = "20px";
+            menuBox.style.fontFamily = "Poppins, sans-serif";
+            menuBox.style.fontSize = "14px";
+    
+            menuBox.innerHTML = `
+                <span style="display: flex; align-items: center; gap: 6px;">
+                    <span style="font-size: 18px;">👤</span>
+                    <strong>${usuario.email}</strong>
+                </span>
+                <span>Tipo: <strong>${usuario.tipo}</strong></span>
+                <button id="logoutBtn" style="margin-top: 8px; padding: 5px 10px; background-color: red; color: white; border: none; border-radius: 5px; cursor: pointer;">Sair</button>
+            `;
+    
+            header.appendChild(menuBox);
+    
+            // Lógica de logout
+            document.getElementById("logoutBtn").addEventListener("click", function () {
+                localStorage.removeItem("usuarioLogado");
+                location.reload();
+            });
+        }
+    </script>
+    
+    
+</body>
+</html>

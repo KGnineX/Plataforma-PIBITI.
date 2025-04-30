@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background-color: #fff;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .signup-container {
+      width: 100%;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: left;
+    }
+
+    .signup-container img {
+      width: 150px;
+      margin: 0 auto 20px auto;
+      display: block;
+    }
+
+    .signup-container h2 {
+      color: black;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    .signup-container label {
+      display: block;
+      font-weight: 500;
+      margin: 10px 0 5px;
+    }
+
+    .signup-container input[type="text"],
+    .signup-container input[type="email"],
+    .signup-container input[type="password"],
+    .signup-container input[type="date"] {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .name-group {
+      display: flex;
+      gap: 10px;
+    }
+
+    .name-group input {
+      flex: 1;
+    }
+
+    .password-info {
+      font-size: 12px;
+      color: #666;
+      margin-top: -8px;
+      margin-bottom: 10px;
+    }
+
+    .signup-container input[type="submit"] {
+      width: 100%;
+      padding: 15px;
+      background-color: blue;
+      color: #fff;
+      font-size: 18px;
+      font-weight: 600;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .signup-container input[type="submit"]:hover {
+      box-shadow: 0 0 8px rgb(54, 54, 228);
+      transform: scale(1.05);
+    }
+
+    .signup-container a {
+      color: blue;
+      text-decoration: none;
+      margin-right: 20px;
+    }
+
+    .signup-container .footer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 15px;
+    }
+
+    .user-section {
+      display: none;
+    }
+
+    .professor,
+    .instituicao {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <a href="index.html"><img src="img/logo_clube_olímpico-removebg-preview.png" alt="Logo Clube Olímpico"></a>
+    <h2>Cadastrar-se</h2>
+    
+    <form id="signup-form">
+      <label for="email">Seu e-mail</label>
+      <input type="email" id="email" name="email" placeholder="exemplo@email.com" required>
+
+      <label for="institution">Instituição</label>
+      <input type="text" id="institution" name="institution" placeholder="Nome da instituição" required>
+
+      <div class="user-section aluno">
+        <div class="name-group">
+          <div>
+            <label for="firstname">Primeiro nome</label>
+            <input type="text" id="firstname" name="firstname">
+          </div>
+          <div>
+            <label for="lastname">Sobrenome</label>
+            <input type="text" id="lastname" name="lastname">
+          </div>
+        </div>
+      </div>
+
+      <div class="user-section professor">
+        <label for="nomeProfessor">Nome completo</label>
+        <input type="text" id="nomeProfessor" name="nomeProfessor">
+
+        <label for="disciplina">Disciplina</label>
+        <input type="text" id="disciplina" name="disciplina">
+      </div>
+
+      <div class="user-section instituicao">
+        <label for="responsavel">Nome do responsável</label>
+        <input type="text" id="responsavel" name="responsavel">
+
+        <label for="cargo">Cargo do responsável</label>
+        <input type="text" id="cargo" name="cargo">
+
+        <label for="emailContato">E-mail de contato</label>
+        <input type="email" id="emailContato" name="emailContato">
+      </div>
+
+      <label for="password">Crie uma senha</label>
+      <p class="password-info">
+        As senhas devem ter pelo menos 8 caracteres e conter uma mistura de letras, números e outros caracteres.
+      </p>
+      <input type="password" id="password" name="password" required>
+
+      <input type="submit" value="Cadastrar-se">
+    </form>
+
+    <div class="footer">
+      <a href="cadastro.html">Voltar</a>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const tipoUsuario = localStorage.getItem("tipoUsuario");
+      const dataNascimento = localStorage.getItem("dataNascimento");
+
+      document.querySelectorAll('.user-section').forEach(section => {
+        section.style.display = 'none';
+      });
+
+      if (tipoUsuario === "Aluno") {
+        document.querySelector('.aluno').style.display = 'block';
+      } else if (tipoUsuario === "Professor") {
+        document.querySelector('.professor').style.display = 'block';
+      } else if (tipoUsuario === "Instituição") {
+        document.querySelector('.instituicao').style.display = 'block';
+      }
+
+      const form = document.getElementById("signup-form");
+
+      // Adiciona tipoUsuario e dataNascimento como campos ocultos
+      const tipoInput = document.createElement("input");
+      tipoInput.type = "hidden";
+      tipoInput.name = "tipoUsuario";
+      tipoInput.value = tipoUsuario;
+      form.appendChild(tipoInput);
+
+      const dataInput = document.createElement("input");
+      dataInput.type = "hidden";
+      dataInput.name = "dataNascimento";
+      dataInput.value = dataNascimento;
+      form.appendChild(dataInput);
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+        const data = new URLSearchParams(formData);
+
+        fetch("https://script.google.com/macros/s/AKfycbwwI0gIzWjksB7Otjul-1rIY4d6shnD0g_iHK64rbJPgN6JJHF5VI6C3AyGY5QIICu3Dw/exec", {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body: data
+        }).then(() => {
+          alert("Cadastro enviado com sucesso!");
+          form.reset();
+          window.location.href = "login.html";
+        }).catch(() => {
+          alert("Erro ao enviar. Tente novamente.");
+        });
+      });
+    });
+  </script>
+</body>
+</html>

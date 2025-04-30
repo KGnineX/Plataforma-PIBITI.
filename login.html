@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .login-container img {
+            width: 150px;
+            margin-bottom: 20px;
+        }
+
+        .login-container h2 {
+            color: blue;
+            margin-bottom: 20px;
+        }
+
+        .login-container input {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-container input[type="submit"] {
+            background-color: blue;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .login-container input[type="submit"]:hover {
+            box-shadow: 0 0 8px rgb(54, 54, 228);
+            transform: scale(1.05);
+        }
+
+        select {
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    background-color: #0000ff;  /* azul do botão */
+    color: white;               /* texto branco */
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D'10'%20height%3D'7'%20viewBox%3D'0%200%2010%207'%20xmlns%3D'http%3A//www.w3.org/2000/svg'%3E%3Cpath%20d%3D'M1%201l4%204%204-4'%20stroke%3D'%23fff'%20stroke-width%3D'2'%20fill%3D'none'%20fill-rule%3D'evenodd'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+select:focus {
+    outline: none;
+    background-color: #0000cc; /* azul escuro ao focar */
+}
+
+option {
+    color: black;              /* texto dentro do dropdown */
+    background-color: white;  /* fundo das opções */
+}
+        .login-container a {
+            color: blue;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <a href="index.html"><img src="img/logo_clube_olímpico-removebg-preview.png" alt="Logo Clube Olímpico"></a>
+    <h2>Login</h2>
+    <form id="login-form">
+      <select name="tipo" id="tipo" required>
+        <option value="">Selecione o tipo de usuário</option>
+        <option value="Instituição">Instituição</option>
+        <option value="Professor">Professor</option>
+        <option value="Aluno">Aluno</option>
+      </select>
+
+      <input type="email" id="email" placeholder="E-mail" required>
+      <input type="password" id="senha" placeholder="Senha" required>
+      <input type="submit" value="Login">
+    </form>
+    <p id="mensagem" style="color: red; margin-top: 10px;"></p>
+    <p>Ainda não possui uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+  </div>
+
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwwI0gIzWjksB7Otjul-1rIY4d6shnD0g_iHK64rbJPgN6JJHF5VI6C3AyGY5QIICu3Dw/exec';
+  
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+  
+      const tipoUsuario = document.getElementById('tipo').value;
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('senha').value.trim();
+  
+      fetch(scriptURL, {
+        method: 'POST',
+        body: new URLSearchParams({
+          acao: 'login',
+          tipoUsuario,
+          email,
+          password
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.success) {
+          // Salva os dados no localStorage
+          localStorage.setItem("usuarioLogado", JSON.stringify({
+            nome: data.nome,
+            email: data.email,
+            tipo: data.tipo
+          }));
+          // Redireciona para index.html
+          window.location.href = "index.html";
+        } else {
+          document.getElementById('mensagem').innerText = data.message || "E-mail ou senha inválidos.";
+        }
+      })
+      .catch(error => {
+        document.getElementById('mensagem').innerText = "Erro na conexão. Tente novamente.";
+        console.error('Erro:', error);
+      });
+    });
+  </script>
+  
+</body>
+</html>
