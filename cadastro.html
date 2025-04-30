@@ -101,9 +101,6 @@
       <button id="instituicao" class="user-type" onclick="selectUserType(this, 'Instituição')">Instituição</button>
     </div>
 
-    <label for="dataNascimento">Data de nascimento</label>
-    <input type="date" id="dataNascimento" required>
-
     <input type="button" value="Avançar" onclick="nextStep()">
     
     <p>Já possui uma conta? <a href="login.html">Login</a></p>
@@ -115,12 +112,12 @@
     function selectUserType(button, type) {
       selectedUserType = type;
 
-      // Remover a classe 'selected' de todos os botões
+      
       document.querySelectorAll('.user-type').forEach(btn => {
         btn.classList.remove('selected');
       });
 
-      // Adicionar a classe 'selected' ao botão clicado
+      
       button.classList.add('selected');
     }
 
@@ -129,17 +126,11 @@
         alert("Selecione o tipo de usuário!");
         return;
       }
-
-      const dataNascimento = document.getElementById('dataNascimento').value;
-      if (!dataNascimento) {
-        alert("Selecione a data de nascimento!");
-        return;
-      }
-
+      
       localStorage.setItem("tipoUsuario", selectedUserType);
-      localStorage.setItem("dataNascimento", dataNascimento);
       window.location.href = 'cadastroEmail.html';  
     }
   </script>
 </body>
 </html>
+
