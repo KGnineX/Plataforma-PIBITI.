@@ -70,8 +70,8 @@
     border: none;
     border-radius: 6px;
     font-size: 16px;
-    background-color: #0000ff;  /* azul do botão */
-    color: white;               /* texto branco */
+    background-color: #0000ff;  
+    color: white;             
     box-sizing: border-box;
     appearance: none;
     -webkit-appearance: none;
@@ -87,12 +87,12 @@
 
 select:focus {
     outline: none;
-    background-color: #0000cc; /* azul escuro ao focar */
+    background-color: #0000cc; 
 }
 
 option {
-    color: black;              /* texto dentro do dropdown */
-    background-color: white;  /* fundo das opções */
+    color: black;             
+    background-color: white; 
 }
         .login-container a {
             color: blue;
@@ -147,13 +147,13 @@ option {
       .then(res => res.json())
       .then(data => {
         if (data.success) {
-          // Salva os dados no localStorage
+          
           localStorage.setItem("usuarioLogado", JSON.stringify({
             nome: data.nome,
             email: data.email,
             tipo: data.tipo
           }));
-          // Redireciona para index.html
+         
           window.location.href = "index.html";
         } else {
           document.getElementById('mensagem').innerText = data.message || "E-mail ou senha inválidos.";
